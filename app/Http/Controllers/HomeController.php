@@ -20,7 +20,7 @@ class HomeController extends Controller
         }else{
             $user = User::all();
         }
-        $path = storage_path('app'.DIRECTORY_SEPARATOR.'csv'.DIRECTORY_SEPARATOR.'usuarios_'.Carbon::now().'.csv');
+        //$path = storage_path('app'.DIRECTORY_SEPARATOR.'csv'.DIRECTORY_SEPARATOR.'usuarios_'.Carbon::now().'.csv');
         //dd($path);
         $csv = Writer::createFromPath($path,'w'); 
         $csv->insertOne(Schema::getColumnListing('users'));
@@ -32,28 +32,37 @@ class HomeController extends Controller
     }
 
 
-    // public function upload(){
-    //     return view('welcome');
-    // }
+    public function upload(){
+        return view('welcome');
+    }
 
-    // public function uploadPost(Request $request){
-    //     //dd($request->csv); 
-    //     $file = $request->csv->storeAs('csv', 'csv.csv');
-    //     return $file;
-    // }
+    public function uploadPost(Request $request){
+        //dd($request->csv); 
+        $file = $request->csv->storeAs('csv', 'csv1.csv');
+        return $file;
+    }
 
-    // public function readCsv(){
-    //     $file = Reader::createFromPath('../storage/app/csv/csv.csv');
-    //     $header = $file->fetchOne(1);
-    //     dd($file->setOffset(1)->setLimit(10)->fetchAll());
-    // }
+    public function readCsv(){
+        $file = Reader::createFromPath('../storage/app/csv/csv.csv');
+        $header = $file->fetchOne(1);
+        dd($file->setOffset(1)->setLimit(10)->fetchAll());
+    }
 
-    // public function showCsv(){
-    //     $file = Reader::createFromPath('../storage/app/csv/csv.csv');
+    public function showCsv(){
+        $file = Reader::createFromPath('../storage/app/csv/csv.csv');
 
-    //     $file = $file->toHTML('table table-striped');
+        $file = $file->toHTML('table table-striped');
 
-    //     return view('dadosCsv', ['file' => $file]);
-    // }
+        return view('dadosCsv', ['file' => $file]);
+    }
+
+    public function readXml(){
+        $file = Reader::createFromPath('../storage/app/csv/csv.csv');
+        $file = $file->setOffset(1)->setLimit(10)->toXML('csvs','csv', 'info');
+        $xml = $file->saveXML();
+        header('Content-Type: application/xml; charset="utf-8"');
+        header('Content-Type:'.strlen($xml));
+        die($xml);
+    }
 
 }
