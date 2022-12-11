@@ -11,12 +11,21 @@
 |
 */
 
+//Rota Padrão
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 //Import CSV
-Route::get('/{status?}',['uses' => 'HomeController@index']);
+Route::get('/download/{status?}',['uses' => 'HomeController@index']);
 
 //Upload CSV
-// Route::get('upload', ['uses' => 'HomeController@upload']);
-// Route::post('upload', ['uses' => 'HomeController@uploadPost']);
-// Route::get('read_csv', ['uses' => 'HomeController@readCsv']);
-// Route::get('show_csv', ['uses' => 'HomeController@showCsv']);
+Route::get('upload', ['uses' => 'HomeController@upload']);
+Route::post('upload', ['uses' => 'HomeController@uploadPost']);
+Route::get('read_csv', ['uses' => 'HomeController@readCsv']);
+
+//HTML
+Route::get('show_csv', ['uses' => 'HomeController@showCsv']);
+
+//XML
+Route::get('readXml', ['uses' => 'HomeController@readXml']);
