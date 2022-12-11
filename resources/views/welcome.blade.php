@@ -67,6 +67,7 @@
     <body>
         <div class="flex-center position-ref full-height">
                 <div class="content">
+                    <h2>Clique no botão "enviar arquivo" para selecionar planilha"</h2>
                 <div class="title m-b-md">
                     <form action="/upload" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                        {{csrf_field()}}
