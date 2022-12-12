@@ -29,3 +29,6 @@ Route::get('show_csv', ['uses' => 'HomeController@showCsv']);
 
 //XML
 Route::get('readXml', ['uses' => 'HomeController@readXml']);
+
+//JSON
+Route::get('readJson', ['uses' => 'HomeController@readJson']);
