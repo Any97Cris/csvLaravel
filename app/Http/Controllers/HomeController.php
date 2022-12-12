@@ -65,4 +65,12 @@ class HomeController extends Controller
         die($xml);
     }
 
+    public function readJson(){
+        $file = Reader::createFromPath('../storage/app/csv/csv.csv');
+        $file = $file->setOffset(1);
+        $response = json_encode($file, JSON_PRETTY_PRINT|JSON_HEX_QUOT|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_TAG);
+        header('Content-Type: application/json; charset="utf-8"');
+        die($response);
+    }
+
 }
